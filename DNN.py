@@ -19,7 +19,7 @@ df = df[~((df < (Q1 - 1.5 * IQR)) | (df > (Q3 + 1.5 * IQR))).any(axis=1)]
 
 # Create new features
 df["bmi_skin"] = df["BMI"] * df["SkinThickness"]
-df["insulin_ratio"] = df["Insulin"] / df["Glucose"]
+# df["insulin_ratio"] = df["Insulin"] / df["Glucose"]
 
 # Split into training and testing subsets
 X_train, X_test, y_train, y_test = train_test_split(df.iloc[:, :-1], df.iloc[:, -1], test_size=0.2, random_state=42)
@@ -31,7 +31,7 @@ X_test = scaler.transform(X_test)
 
 # Define the neural network architecture
 model = tf.keras.Sequential([
-    tf.keras.layers.Dense(64, activation='relu', input_shape=(8,)),
+    tf.keras.layers.Dense(64, activation='relu', input_shape=(7,)),
     tf.keras.layers.Dense(32, activation='relu'),
     tf.keras.layers.Dense(1, activation='linear')
 ])
